@@ -1,5 +1,5 @@
 ﻿using BeaverCar.Models;
-using BeaverCar.Services;
+using BeaverCar.ViewModels.Services;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

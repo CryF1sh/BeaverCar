@@ -1,4 +1,4 @@
-﻿using BeaverCar.Services;
+﻿using BeaverCar.ViewModels.Services;
 using BeaverCar.Views;
 using System;
 using Xamarin.Forms;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BeaverCar.Services
+namespace BeaverCar.ViewModels.Services
 {
     public interface IDataStore<T>
     {
