@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-//using Xamarin.Forms.Maps;
+using Xamarin.Forms.Maps;
 
 namespace BeaverCar.Views
 {
@@ -13,8 +13,8 @@ namespace BeaverCar.Views
         public SearchPage()
         {
             InitializeComponent();
-            //Map map = new Map();
-            //Content = map;
+            Xamarin.Forms.Maps.Map map = new Xamarin.Forms.Maps.Map();
+            Content = map;
         }
     }
 }
