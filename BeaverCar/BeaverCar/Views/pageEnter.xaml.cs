@@ -26,8 +26,7 @@ namespace BeaverCar.Views
         private void Button_Clicked(object sender, EventArgs e)
         {
             client = new HttpClient();
-            //var responce = client.DownloadString("http://192.168.43.65:65226/api/Users");
-            //listUsers = JsonConvert.DeserializeObject<List<User>>(responce);
+            listUsers = JsonConvert.DeserializeObject<List<User>>((string)(Client.GetResponse("Users")));
             //if (string.IsNullOrEmpty(contrPhone.Text))
             //{
             //    DisplayAlert("Ошибка", "Номер не был введён", "Ok");
@@ -35,12 +34,11 @@ namespace BeaverCar.Views
             //}
             //try
             //{
-            //    var sotr = listUsers.FirstOrDefault(p => p.PhoneNumber == contrPhone.Text);
+            //    var users = listUsers.FirstOrDefault(p => p.PhoneNumber == contrPhone.Text);
             //    if (sotr == null)
             //        DisplayAlert("Ошибка", "Такого номера нет", "Ок");
             //    else
-            //        DisplayAlert("1", "Т2", "Ок");
-                    Navigation.PushAsync(new pageToken(client));
+                    Navigation.PushAsync(new UserTypeSelectionPage(users));
             //}
             //catch
             //{
