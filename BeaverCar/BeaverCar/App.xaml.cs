@@ -13,7 +13,7 @@ namespace BeaverCar
             InitializeComponent();
 
             DependencyService.Register<MockDataStore>();
-            MainPage = new NavigationPage(new pageEnter());
+            MainPage = new NavigationPage(new SearchPage());
         }
 
         protected override void OnStart()

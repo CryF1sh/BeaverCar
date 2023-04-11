@@ -5,6 +5,7 @@
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              Title="Search">
     <StackLayout Padding="12, 12, 12, 12">
-        <maps:Map IsShowingUser="True"/>
+        <maps:Map/>
+        <Entry x:Name="LabelLocation"/>
     </StackLayout>
 </ContentPage>

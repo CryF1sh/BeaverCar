@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
@@ -10,11 +8,41 @@ namespace BeaverCar.Views
 {
     public partial class SearchPage : ContentPage
     {
+        public double firstLatitude = 0, firstLongitude = 0;
         public SearchPage()
         {
             InitializeComponent();
-            Xamarin.Forms.Maps.Map map = new Xamarin.Forms.Maps.Map();
+            FirstMapLocation();
+            Position position = new Position(firstLatitude, firstLongitude);
+            MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
+            Xamarin.Forms.Maps.Map map = new Xamarin.Forms.Maps.Map(mapSpan) { IsShowingUser = true };
             Content = map;
+        }
+
+        private async void FirstMapLocation()
+        {
+            try
+            {
+                var location = await Geolocation.GetLastKnownLocationAsync();
+                if (location == null)
+                {
+                    location = await Geolocation.GetLocationAsync(new GeolocationRequest
+                    {
+                        DesiredAccuracy = GeolocationAccuracy.Medium,
+                        Timeout = TimeSpan.FromSeconds(30)
+                    });
+                }
+                if (location == null)
+                    LabelLocation.Text = "No GPS";
+                else
+                        LabelLocation.Text = $"{location.Latitude} {location.Longitude}";
+                firstLatitude = location.Latitude;
+                firstLongitude = location.Longitude;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"Что-то не так:{ex.Message}");
+            }
         }
     }
 }
