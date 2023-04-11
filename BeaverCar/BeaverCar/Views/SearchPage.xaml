@@ -4,8 +4,13 @@
              x:Class="BeaverCar.Views.SearchPage"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
              Title="Поиск">
-    <StackLayout Padding="12, 12, 12, 12">
-        <maps:Map/>
-        <Entry x:Name="LabelLocation"/>
-    </StackLayout>
+    <ContentPage.Content>
+        <Grid>
+            <Label x:Name="LabelLocation" HorizontalOptions="Center" VerticalOptions="Start" FontSize="10"/>
+            
+            <StackLayout>
+                <maps:Map/>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
 </ContentPage>

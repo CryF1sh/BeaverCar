@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -35,9 +37,14 @@ namespace BeaverCar.Views
                 if (location == null)
                     LabelLocation.Text = "No GPS";
                 else
-                        LabelLocation.Text = $"{location.Latitude} {location.Longitude}";
-                firstLatitude = location.Latitude;
-                firstLongitude = location.Longitude;
+                {
+                    firstLatitude = location.Latitude;
+                    firstLongitude = location.Longitude;
+                    Geocoder geoCoder = new Geocoder();
+                    Position position = new Position(firstLatitude, firstLongitude);
+                    IEnumerable<string> possibleAddresses = await geoCoder.GetAddressesForPositionAsync(position);
+                    LabelLocation.Text = possibleAddresses.FirstOrDefault();
+                }
             }
             catch (Exception ex)
             {
