@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:control="clr-namespace:Xamarin.Forms.MaskedEntry;assembly=Xamarin.Forms.MaskedEntry"
              x:Class="BeaverCar.Views.pageEnter">
-    
-    <StackLayout VerticalOptions="Center">
-        <Label Text="Введите телефон для входа" FontSize="16" HorizontalOptions="Center"/>
-        <control:MaskedEntry Mask="+7(XXX) XXX XX-XX" Keyboard="Numeric" x:Name="contrPhone"/>
-        <Button Text="Отправить SMS" Clicked="Button_Clicked"/>
-    </StackLayout>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center" HorizontalOptions="Fill" Padding="10,0,10,0">
+            <Label Text="Введите телефон для входа" FontSize="16" HorizontalOptions="Center"/>
+            <control:MaskedEntry Mask="+7(XXX) XXX XX-XX" Keyboard="Numeric" x:Name="contrPhone" Placeholder="+7(999) 999 99-99"/>
+            <Button Text="Отправить" HorizontalOptions="End" Clicked="Button_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
