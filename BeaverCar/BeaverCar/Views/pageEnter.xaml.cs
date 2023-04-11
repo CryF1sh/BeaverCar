@@ -8,18 +8,20 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Newtonsoft.Json;
 using System.Net;
+using BeaverCar.Class;
 
 namespace BeaverCar.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class pageEnter : ContentPage
     {
+        List<User> listUsers;
         public pageEnter()
         {
             InitializeComponent();
             var client = new WebClient();
-            //var responce = client.DownloadString("http://192.168.1.161:61306/api/Sotrudnics");
-            //прописать нужный класс на основе джсон заброса из апи сервиса ladno = JsonConvert.DeserializeObject<List<Sotrudnic>>(responce);
+            var responce = client.DownloadString("http://192.168.43.65:65226/api/Users");
+            listUsers = JsonConvert.DeserializeObject<List<User>>(responce);
         }
 
         private void Button_Clicked(object sender, EventArgs e)
@@ -31,11 +33,12 @@ namespace BeaverCar.Views
             }
             try
             {
-                //var sotr = ladno.FirstOrDefault(p => p.VhodCode == Int32.Parse(contrPhone.Text));
-                //if (sotr == null)
-                //    DisplayAlert("Ошибка", "Такого номера нет", "Ок");
-                //else
-                    // некст страница после входа Navigation.PushAsync();
+                var sotr = listUsers.FirstOrDefault(p => p.PhoneNumber == contrPhone.Text);
+                if (sotr == null)
+                    DisplayAlert("Ошибка", "Такого номера нет", "Ок");
+                else
+                    DisplayAlert("1", "Т2", "Ок");
+                    //Navigation.PushAsync();
             }
             catch
             {
