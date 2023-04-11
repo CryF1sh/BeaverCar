@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BeaverCar.Class;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,6 +17,13 @@ namespace BeaverCar.Views
         public ListTripPage()
         {
             InitializeComponent();
+            var trips = JsonConvert.DeserializeObject<List<Trip>>((string)Client.GetResponse("Trips"));
+            BindingContext = trips;
+        }
+
+        private void BtnCreateTrip_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new CreateTripPage());
         }
     }
 }
