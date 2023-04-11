@@ -10,6 +10,7 @@ namespace BeaverCar.Views
 {
     public partial class SearchPage : ContentPage
     {
+        private string pos = "";
         public double firstLatitude = 0, firstLongitude = 0;
         public SearchPage()
         {
@@ -18,6 +19,7 @@ namespace BeaverCar.Views
             Position position = new Position(firstLatitude, firstLongitude);
             MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
             Xamarin.Forms.Maps.Map map = new Xamarin.Forms.Maps.Map(mapSpan) { IsShowingUser = true };
+            LabelLocation.Text = pos;
             Content = map;
         }
 
@@ -35,7 +37,7 @@ namespace BeaverCar.Views
                     });
                 }
                 if (location == null)
-                    LabelLocation.Text = "No GPS";
+                    pos ="No GPS";
                 else
                 {
                     firstLatitude = location.Latitude;
@@ -43,7 +45,7 @@ namespace BeaverCar.Views
                     Geocoder geoCoder = new Geocoder();
                     Position position = new Position(firstLatitude, firstLongitude);
                     IEnumerable<string> possibleAddresses = await geoCoder.GetAddressesForPositionAsync(position);
-                    LabelLocation.Text = possibleAddresses.FirstOrDefault();
+                    pos= possibleAddresses.FirstOrDefault();
                 }
             }
             catch (Exception ex)
