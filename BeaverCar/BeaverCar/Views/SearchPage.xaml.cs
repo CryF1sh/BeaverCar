@@ -89,13 +89,8 @@ namespace BeaverCar.Views
             else
                     await DisplayAlert("Ошибка!", "Неправильный адрес", "ОК");
             }
-            catch (FeatureNotSupportedException fnsEx)
+            catch
             {
-                // Feature not supported on device
-            }
-            catch (Exception ex)
-            {
-                // Handle exception that may have occurred in geocoding
             }
         }
 
