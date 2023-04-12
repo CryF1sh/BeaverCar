@@ -3,30 +3,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BeaverCar.Views.TripViewPage">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical">
+        <StackLayout Orientation="Vertical" Padding="10">
 
             <Label Text="Поездка: " FontSize="Large" />
             <Label Text="{Binding id}" FontSize="Large" />
-
-            <Label Text="Дата поездки: " FontSize="Medium" />
-            <Label Text="{Binding Data}" FontSize="Medium" />
+            
+            <Label Text="{Binding Name}" FontSize="Large" />
+            
+            <Label Text="Дата поездки: " FontSize="Large" />
+            <Label Text="{Binding Data}" FontSize="Medium" FontAttributes="Bold" />
 
             <Label Text="Цена:" FontSize="Large" />
-            <Label Text="{Binding Price}" FontSize="Large" />
+            <Label Text="{Binding Price}" FontSize="Medium" FontAttributes="Bold" />
 
             <Label Text="Точка отправки:" FontSize="Large" />
-            <Label Text="{Binding StritBegin}" FontSize="Large" />
+            <Label Text="{Binding StritBegin}" FontSize="Medium" FontAttributes="Bold" />
 
             <Label Text="Точка прибытия:" FontSize="Large" />
-            <Label Text="{Binding StritEnd}" FontSize="Large" />
+            <Label Text="{Binding StritEnd}" FontSize="Medium" FontAttributes="Bold"/>
 
             <Label Text="Количество мест:" FontSize="Large" />
-            <Label Text="{Binding CountPlace}" FontSize="Large" />
+            <Label Text="{Binding CountPlace}" FontSize="Medium" FontAttributes="Bold"/>
 
             <Label Text="Создатель:" FontSize="Large" />
-            <Label Text="{Binding CreaterID}" FontSize="Large" />
+            <Label Text="{Binding CreaterID}" FontSize="Medium" FontAttributes="Bold" />
 
-            <Button Text="Зарегестрироваться в поездку"  x:Name="BtnOnRegister" Clicked="BtnOnRegister_Clicked"/>
+            <Button Text="Зарегестрироваться в поездку"  x:Name="BtnOnRegister" Clicked="BtnOnRegister_Clicked" VerticalOptions="EndAndExpand"/>
         </StackLayout>
         
     </ContentPage.Content>

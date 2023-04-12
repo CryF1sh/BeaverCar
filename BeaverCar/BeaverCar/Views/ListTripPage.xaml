@@ -39,14 +39,14 @@
                             <Frame BorderColor="Gray" CornerRadius="5" Padding="8" Grid.ColumnSpan="3">
                                 <StackLayout>
                                     <DatePicker IsEnabled="False" FontSize="Medium" FontAttributes="Bold" Date="{Binding Date}"/>
-                                    <Label Text="Из" FontSize="Medium" FontAttributes="Bold" />
+                                    <Label Text="Из" FontSize="Large" />
                                     <Label Text="{Binding StritBegin}" FontSize="Medium" FontAttributes="Bold" x:Name="StartPoint"/>
-                                    <Label Text="В" FontSize="Medium" FontAttributes="Bold" />
+                                    <Label Text="В" FontSize="Large" />
                                     <Label Text="{Binding StritEnd}" FontSize="Medium" FontAttributes="Bold" />
-                                    <Label Text="Цена" FontSize="Medium" FontAttributes="Bold" />
-                                    <Label Text="{Binding Price}"/>
-                                    <Label Text="Статус заявки" FontSize="Small" FontAttributes="Bold" />
-                                    <Label Text="{Binding StatusID}" FontSize="Small" FontAttributes="Bold" />
+                                    <Label Text="Цена" FontSize="Large" />
+                                    <Label Text="{Binding Price}" FontAttributes="Bold" />
+                                    <Label Text="Статус заявки" FontSize="Medium"/>
+                                    <Label Text="{Binding Name}" FontSize="Small" FontAttributes="Bold" />
                                     <Button Text="Просмотреть поездку" x:Name="BtnOpenTrip" Clicked="BtnOpenTrip_Clicked"/>
                                 </StackLayout>
                             </Frame>
