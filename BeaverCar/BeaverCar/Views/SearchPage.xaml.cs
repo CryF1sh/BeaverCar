@@ -7,6 +7,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using System.Reflection;
 using System.Security.Cryptography;
+using BeaverCar.Class;
 
 namespace BeaverCar.Views
 {
@@ -49,6 +50,7 @@ namespace BeaverCar.Views
         {
             try
             {
+                double pos1Lat=0, pos1Long=0, pos2Lat=0, pos2Long=0;
                 int error = 0;
                 var destinationaddress = Destination.Text;
                 var locations = await Geocoding.GetLocationsAsync(destinationaddress);
@@ -57,6 +59,11 @@ namespace BeaverCar.Views
                 {
                     error++;
                 }
+                else
+                {
+                    pos1Lat = location.Latitude;
+                    pos1Long = location.Longitude;
+                }
                 var originaddress = Origin.Text;
                 locations = await Geocoding.GetLocationsAsync(originaddress);
                 location = locations?.FirstOrDefault();
@@ -64,9 +71,19 @@ namespace BeaverCar.Views
             {
                     error++;
             }
+            else
+                {
+                    pos2Lat = location.Latitude;
+                    pos2Long = location.Longitude;
+                }
             if(error == 0)
                 {
-                    //destinationaddress
+                    Trip trip = new Trip();
+                    trip.StartPointLatitude=Convert.ToString(pos1Lat);
+                    trip.StartPointLongitude=Convert.ToString(pos1Long);
+                    trip.EndPointLatitude=Convert.ToString(pos2Lat);
+                    trip.EndPointLongitude = Convert.ToString(pos2Long);
+                    await Navigation.PushAsync(new CreateTripPage(trip));
                     //originaddress
                 }
             else
