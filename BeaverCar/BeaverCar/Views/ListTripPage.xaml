@@ -38,7 +38,7 @@
                         <Grid Padding="0,5" ColumnDefinitions=".3*, .3* ,.3*">
                             <Frame BorderColor="Gray" CornerRadius="5" Padding="8" Grid.ColumnSpan="3">
                                 <StackLayout>
-                                    <DatePicker IsEnabled="False" FontSize="Medium" FontAttributes="Bold" Date="{Binding Date}"/>
+                                    <DatePicker IsEnabled="False" FontSize="Medium" FontAttributes="Bold" Date="{Binding Data}"/>
                                     <Label Text="Из" FontSize="Large" />
                                     <Label Text="{Binding StritBegin}" FontSize="Medium" FontAttributes="Bold" x:Name="StartPoint"/>
                                     <Label Text="В" FontSize="Large" />
