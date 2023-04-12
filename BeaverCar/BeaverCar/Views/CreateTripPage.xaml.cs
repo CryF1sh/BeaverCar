@@ -37,5 +37,4 @@ namespace BeaverCar.Views
             //HttpResponseMessage response = await client.PostAsync("Trips", content);
         }
     }
-    }
 }
