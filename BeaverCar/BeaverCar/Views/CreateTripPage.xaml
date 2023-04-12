@@ -12,7 +12,7 @@
             <Label Text="{Binding EndPoint}" FontSize="Large" />
             
             <Label Text="Дата и время поездки: " FontSize="Large" />
-            <Label Text="{Binding Date}" FontSize="Large" />
+            <Label Text="{Binding Date}" FontSize="Large" x:Name="name"/>
 
             <Label Text="Желаемая стоимость поездки:" FontSize="Large" />
             <Label Text="{Binding Price}" FontSize="Large" />
@@ -20,7 +20,7 @@
             <Label Text="Количество пассажиров которые поедут с вами:" FontSize="Large" />
             <Label Text="{Binding Price}" FontSize="Large" />
 
-            <Label Text="Количество пассажиров которое вы готовы взять:" FontSize="Large" />
+            <Label Text="Количество пассажиров которое вы готовы взять:" FontSize="Large"/>
             <Label Text="{Binding Price}" FontSize="Large" />
 
             <Button Text="Создать поездку"  x:Name="BtnCreateTrip" Clicked="BtnCreateTrip_Clicked"/>

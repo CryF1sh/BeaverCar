@@ -24,10 +24,8 @@ namespace BeaverCar.Views
 
         private void BtnOnRegister_Clicked(object sender, EventArgs e)
         {
-            var client = new HttpClient();
-            client.BaseAddress = new Uri(Client.Url);
 
-            //string jsonData = @"{"""" : }";
         }
+            
     }
 }
