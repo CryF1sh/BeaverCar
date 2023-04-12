@@ -14,10 +14,10 @@
             <Entry Text="{Binding Price}" FontSize="Medium" FontAttributes="Bold" x:Name="entrPrice"/>
 
             <Label Text="Точка отправки:" FontSize="Large" />
-            <Entry FontSize="Medium" FontAttributes="Bold" x:Name="entrDate"/>
+            <Entry FontSize="Medium" FontAttributes="Bold" x:Name="entrStart"/>
 
             <Label Text="Точка прибытия:" FontSize="Large" />
-            <Entry FontSize="Medium" FontAttributes="Bold" x:Name="entrDate"/>
+            <Entry FontSize="Medium" FontAttributes="Bold" x:Name="entrEnd"/>
 
             <Label Text="Количество мест:" FontSize="Large" />
             <Entry Text="{Binding CountPlace}" FontSize="Medium" FontAttributes="Bold" x:Name="entrCount"/>
