@@ -17,6 +17,7 @@ namespace BeaverCar.Class
          public object CarID { get; set; }
         public bool IsDriver { get; set; }
         public float Rating { get; set; }
+        
 
         //public ImageSource PhotoUser //Должно подгружать фото 
         //{

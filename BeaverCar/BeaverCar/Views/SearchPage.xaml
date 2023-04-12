@@ -39,7 +39,7 @@
                 HeightRequest="50"
                 WidthRequest="100"
                 Text="Проложить маршрут"/>
-        <!--<Label x:Name="LabelLocation" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Start" FontSize="10"/>
-        <maps:Map x:Name="myMap" MapClicked="myMap_MapClicked" IsShowingUser="True"/> !-->
+        <Label x:Name="LabelLocation" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Start" FontSize="10"/>
+        <maps:Map x:Name="myMap" MapClicked="myMap_MapClicked" IsShowingUser="True"/> 
     </Grid>
 </ContentPage>

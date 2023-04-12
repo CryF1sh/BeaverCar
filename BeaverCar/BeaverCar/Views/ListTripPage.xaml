@@ -40,7 +40,7 @@
                                 <StackLayout>
                                     <DatePicker IsEnabled="False" FontSize="Medium" FontAttributes="Bold" Date="{Binding Date}"/>
                                     <Label Text="Из" FontSize="Medium" FontAttributes="Bold" />
-                                    <Label Text="{Binding StartPoint}" FontSize="Medium" FontAttributes="Bold" />
+                                    <Label Text="{Binding StartPoint}" FontSize="Medium" FontAttributes="Bold" x:Name="StartPoint"/>
                                     <Label Text="В" FontSize="Medium" FontAttributes="Bold" />
                                     <Label Text="{Binding EndPoint}" FontSize="Medium" FontAttributes="Bold" />
                                     <Label Text="Цена" FontSize="Medium" FontAttributes="Bold" />
