@@ -4,18 +4,27 @@
              x:Class="BeaverCar.Views.TripViewPage">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
-            
-            <Label Text="Дата поездки: " FontSize="Large" />
-            <Label Text="{Binding Date}" FontSize="Large" />
+
+            <Label Text="Поездка: " FontSize="Large" />
+            <Label Text="{Binding id}" FontSize="Large" />
+
+            <Label Text="Дата поездки: " FontSize="Medium" />
+            <Label Text="{Binding Data}" FontSize="Medium" />
 
             <Label Text="Цена:" FontSize="Large" />
             <Label Text="{Binding Price}" FontSize="Large" />
 
             <Label Text="Точка отправки:" FontSize="Large" />
-            <Label Text="{Binding StartPoint}" FontSize="Large" />
+            <Label Text="{Binding StritBegin}" FontSize="Large" />
 
             <Label Text="Точка прибытия:" FontSize="Large" />
-            <Label Text="{Binding EndPoint}" FontSize="Large" />
+            <Label Text="{Binding StritEnd}" FontSize="Large" />
+
+            <Label Text="Количество мест:" FontSize="Large" />
+            <Label Text="{Binding CountPlace}" FontSize="Large" />
+
+            <Label Text="Создатель:" FontSize="Large" />
+            <Label Text="{Binding CreaterID}" FontSize="Large" />
 
             <Button Text="Зарегестрироваться в поездку"  x:Name="BtnOnRegister" Clicked="BtnOnRegister_Clicked"/>
         </StackLayout>

@@ -15,11 +15,11 @@ namespace BeaverCar.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TripViewPage : ContentPage
     {
-        public TripViewPage()
+        public TripViewPage(Trip trip)
         {
             InitializeComponent();
-            //var trip = JsonConvert.DeserializeObject<Trip>((string)Client.GetResponse("Trips"));
-            //BindingContext = trip;
+            //var trip1 = JsonConvert.DeserializeObject<Trip>((string)Client.GetResponse("Trips"));
+            BindingContext = trip;
         }
 
         private void BtnOnRegister_Clicked(object sender, EventArgs e)

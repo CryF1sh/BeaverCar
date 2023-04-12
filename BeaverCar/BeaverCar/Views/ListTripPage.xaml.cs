@@ -48,5 +48,10 @@ namespace BeaverCar.Views
             Navigation.PushAsync(new CreateTripPage((sender as Button).BindingContext as Trip));
             
         }
+
+        private void BtnOpenTrip_Clicked(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new TripViewPage((sender as Button).BindingContext as Trip));
+        }
     }
 }
