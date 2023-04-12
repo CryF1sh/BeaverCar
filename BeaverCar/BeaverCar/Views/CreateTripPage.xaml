@@ -3,10 +3,27 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="BeaverCar.Views.CreateTripPage">
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+        <StackLayout Orientation="Vertical">
+
+            <Label Text="Точка отправки:" FontSize="Large" />
+            <Label Text="{Binding StartPoint}" FontSize="Large" />
+
+            <Label Text="Точка прибытия:" FontSize="Large" />
+            <Label Text="{Binding EndPoint}" FontSize="Large" />
+            
+            <Label Text="Дата и время поездки: " FontSize="Large" />
+            <Label Text="{Binding Date}" FontSize="Large" />
+
+            <Label Text="Желаемая стоимость поездки:" FontSize="Large" />
+            <Label Text="{Binding Price}" FontSize="Large" />
+
+            <Label Text="Количество пассажиров которые поедут с вами:" FontSize="Large" />
+            <Label Text="{Binding Price}" FontSize="Large" />
+
+            <Label Text="Количество пассажиров которое вы готовы взять:" FontSize="Large" />
+            <Label Text="{Binding Price}" FontSize="Large" />
+
+            <Button Text="Создать поездку"  x:Name="BtnCreateTrip" Clicked="BtnCreateTrip_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

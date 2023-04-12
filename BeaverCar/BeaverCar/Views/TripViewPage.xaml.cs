@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BeaverCar.Class;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,16 +17,11 @@ namespace BeaverCar.Views
         public TripViewPage()
         {
             InitializeComponent();
-
-            //BindingContext = ; Здесь нужно дать объект поездки
+            var trip = JsonConvert.DeserializeObject<Trip>((string)Client.GetResponse("Trips"));
+            BindingContext = trip;
         }
 
         private void BtnOnRegister_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
-        private void BtnReturn_Clicked(object sender, EventArgs e)
         {
 
         }
