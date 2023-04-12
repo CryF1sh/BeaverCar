@@ -27,7 +27,6 @@ namespace BeaverCar.Views
             InitializeComponent();
             FirstMapLocation();
             Position position = new Position(firstLatitude, firstLongitude);
-            //MapSpan mapSpan = new MapSpan(position, 0.01, 0.01);
 
             myMap.Pins.Add(pinRoute1);
             myMap.Pins.Add(pinRoute2);
@@ -50,7 +49,7 @@ new Position(firstLatitude, firstLongitude),
     }
             };
             IEnumerable<string> possibleAddresses = await geoCoder.GetAddressesForPositionAsync(pinRoute2.Position);
-            LabelLocation.Text = possibleAddresses.FirstOrDefault();
+            //LabelLocation.Text = possibleAddresses.FirstOrDefault();
             myMap.MapElements.Add(polyline);
         }
 
@@ -68,14 +67,16 @@ new Position(firstLatitude, firstLongitude),
                     });
                 }
                 if (location == null)
-                    LabelLocation.Text = "No GPS";
+                {
+                    //LabelLocation.Text = "No GPS";
+                }
                 else
                 {
                     firstLatitude = location.Latitude;
                     firstLongitude = location.Longitude;
                     Position position = new Position(firstLatitude, firstLongitude);
                     IEnumerable<string> possibleAddresses = await geoCoder.GetAddressesForPositionAsync(position);
-                    LabelLocation.Text = possibleAddresses.FirstOrDefault();
+                    //LabelLocation.Text = possibleAddresses.FirstOrDefault();
                 }
             }
             catch (Exception ex)
