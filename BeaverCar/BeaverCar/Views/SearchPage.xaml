@@ -1,17 +1,45 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BeaverCar.Views.SearchPage"
              xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             x:Class="BeaverCar.Views.SearchPage"
              Title="Поиск">
-    <StackLayout>
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Label Grid.Row="0" x:Name="LabelLocation" HorizontalOptions="Center" VerticalOptions="Start" FontSize="10"/>
-            <maps:Map Grid.Row="1"/>
-        </Grid>
-    </StackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <StackLayout Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Padding="0,10" Spacing="0" HorizontalOptions="Center">
+            <BoxView HeightRequest="5"  WidthRequest="5" CornerRadius="2.5" Color="{StaticResource Primary}" x:Name="originView">
+                
+            </BoxView>
+            <BoxView WidthRequest="0.5" HorizontalOptions="Center" VerticalOptions="FillAndExpand" Color="Gray">
+                
+            </BoxView>
+            <BoxView HeightRequest="5" WidthRequest="5" Color="RoyalBlue" x:Name="destionationView">
+                
+            </BoxView>
+        </StackLayout>
+        <Entry Placeholder="Откуда"
+               Grid.Row="0" 
+               Grid.Column="1" 
+               HorizontalOptions="FillAndExpand"/>
+        <Entry Placeholder="Куда"
+               Grid.Row="1" 
+               Grid.Column="1" 
+               HorizontalOptions="FillAndExpand"/>
+        <Button Grid.Row="1"
+                Grid.Column="2" 
+                VerticalOptions="EndAndExpand"
+                HeightRequest="50"
+                WidthRequest="100"
+                Text="Проложить маршрут"/>
+        <!--<Label x:Name="LabelLocation" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Start" FontSize="10"/>
+        <maps:Map x:Name="myMap" MapClicked="myMap_MapClicked" IsShowingUser="True"/> !-->
+    </Grid>
 </ContentPage>

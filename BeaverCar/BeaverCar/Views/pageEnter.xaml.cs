@@ -38,7 +38,7 @@ namespace BeaverCar.Views
             //    if (sotr == null)
             //        DisplayAlert("Ошибка", "Такого номера нет", "Ок");
             //    else
-                    Navigation.PushAsync(new UserTypeSelectionPage(users));
+                    //Navigation.PushAsync(new UserTypeSelectionPage(users));
             //}
             //catch
             //{
