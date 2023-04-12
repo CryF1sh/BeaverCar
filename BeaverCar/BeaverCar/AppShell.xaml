@@ -30,8 +30,8 @@
     </Shell.Resources>
 
     <TabBar>
-        <ShellContent Title="Поиск" Icon="icon_search.png" ContentTemplate="{DataTemplate local:SearchPage}" />
         <ShellContent Title="Список поездок" Icon="icon_search.png" ContentTemplate="{DataTemplate local:ListTripPage}" />
+        <ShellContent Title="Создание поездки" Icon="icon_feed.png" ContentTemplate="{DataTemplate local:SearchPage}" />
         <ShellContent Title="Профиль" Icon="icon_profile.png" ContentTemplate="{DataTemplate local:ProfilePage}" />
     </TabBar>
 

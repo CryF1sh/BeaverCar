@@ -23,27 +23,27 @@ namespace BeaverCar.Views
             InitializeComponent();            
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
             client = new HttpClient();
             listUsers = JsonConvert.DeserializeObject<List<User>>((string)(Client.GetResponse("Users")));
-            //if (string.IsNullOrEmpty(contrPhone.Text))
-            //{
-            //    DisplayAlert("Ошибка", "Номер не был введён", "Ok");
-            //    return;
-            //}
-            //try
-            //{
-            //    var users = listUsers.FirstOrDefault(p => p.PhoneNumber == contrPhone.Text);
-            //    if (sotr == null)
-            //        DisplayAlert("Ошибка", "Такого номера нет", "Ок");
-            //    else
-                    //Navigation.PushAsync(new UserTypeSelectionPage(users));
-            //}
-            //catch
-            //{
-            //    DisplayAlert("Ошибка", "Введён неправельный номер", "Ок");
-            //}
+            if (string.IsNullOrEmpty(contrPhone.Text))
+            {
+                await DisplayAlert("Ошибка", "Номер не был введён", "Ok");
+                return;
+            }
+            try
+            {
+                var users = listUsers.FirstOrDefault(p => p.PhoneNumber == contrPhone.Text);
+                if (users == null)
+                    await DisplayAlert("Ошибка", "Такого номера нет", "Ок");
+                else
+                    await Navigation.PushAsync(new UserTypeSelectionPage(users));
+            }
+            catch
+            {
+                await DisplayAlert("Ошибка", "Введён неправельный номер", "Ок");
+            }
         }
     }
 }

@@ -32,21 +32,21 @@
                 </Picker>
             </Grid>
 
-            <CollectionView Grid.Row="1" Grid.ColumnSpan="3" Background="LightGreen">
+            <CollectionView Grid.Row="1" Grid.ColumnSpan="3" Background="LightGreen" x:Name="ListTrip">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid Padding="0,5" ColumnDefinitions=".3*, .3* ,.3*">
                             <Frame BorderColor="Gray" CornerRadius="5" Padding="8" Grid.ColumnSpan="3">
                                 <StackLayout>
-                                    <DatePicker IsEnabled="False" FontSize="Medium" FontAttributes="Bold"/>
-                                    <Label Text="пунктА пунктБ" FontSize="Medium" FontAttributes="Bold" />
-                                    <BoxView Color="Gray"  HeightRequest="2" HorizontalOptions="Fill" />
-                                    <Label  Text="{Binding Name}"     />
-                                    <Label  Text="{Binding Telephone}"/>
-                                    <BoxView Color="Gray"  HeightRequest="2" HorizontalOptions="Fill" />
-                                    <Label Text="Еще едут" FontSize="Medium" FontAttributes="Bold" />
-                                    <Label  Text="{Binding CountPlace}"/>
-                                    <Label Text="Статус заявки РУПАСОВ" FontSize="Small" FontAttributes="Bold" />
+                                    <DatePicker IsEnabled="False" FontSize="Medium" FontAttributes="Bold" Date="{Binding Date}"/>
+                                    <Label Text="Из" FontSize="Medium" FontAttributes="Bold" />
+                                    <Label Text="{Binding StartPoint}" FontSize="Medium" FontAttributes="Bold" />
+                                    <Label Text="В" FontSize="Medium" FontAttributes="Bold" />
+                                    <Label Text="{Binding EndPoint}" FontSize="Medium" FontAttributes="Bold" />
+                                    <Label Text="Цена" FontSize="Medium" FontAttributes="Bold" />
+                                    <Label Text="{Binding Price}"/>
+                                    <Label Text="Статус заявки" FontSize="Small" FontAttributes="Bold" />
+                                    <Label Text="{Binding StatusID}" FontSize="Small" FontAttributes="Bold" />
                                 </StackLayout>
                             </Frame>
                         </Grid>

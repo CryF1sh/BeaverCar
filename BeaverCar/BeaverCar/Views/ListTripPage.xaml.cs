@@ -2,6 +2,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Text;
@@ -29,7 +30,9 @@ namespace BeaverCar.Views
             //    DisplayAlert("Error", "Не удалось подключиться к API", "Ок");
             //}
             var trips = JsonConvert.DeserializeObject<List<Trip>>((string)Client.GetResponse("Trips"));
-            BindingContext = trips;
+            //var trips = JsonConvert.DeserializeObject<List<Trip>>((string)Client.GetResponse("Trips"));
+
+            //BindingContext = trips;
         }
 
         private void BtnCreateTrip_Clicked(object sender, EventArgs e)
