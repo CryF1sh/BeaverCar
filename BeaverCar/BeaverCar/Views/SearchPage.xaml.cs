@@ -26,8 +26,6 @@ namespace BeaverCar.Views
         {
             InitializeComponent();
             FirstMapLocation();
-            Position position = new Position(firstLatitude, firstLongitude);
-
             myMap.Pins.Add(pinRoute1);
             myMap.Pins.Add(pinRoute2);
             pinRoute1.Position = new Xamarin.Forms.Maps.Position(firstLatitude, firstLongitude);
@@ -48,9 +46,27 @@ new Position(firstLatitude, firstLongitude),
         new Position(e.Position.Latitude, e.Position.Longitude)
     }
             };
-            IEnumerable<string> possibleAddresses = await geoCoder.GetAddressesForPositionAsync(pinRoute2.Position);
-            //LabelLocation.Text = possibleAddresses.FirstOrDefault();
+            var possibleAddresses = await Geocoding.GetPlacemarksAsync(pinRoute2.Position.Latitude, pinRoute2.Position.Longitude);
+            Placemark placemark = possibleAddresses.FirstOrDefault();
+            locationLabel.Text = placemark.AdminArea + " " + placemark.Locality + " " + placemark.Thoroughfare + " " + placemark.SubThoroughfare;
             myMap.MapElements.Add(polyline);
+        }
+
+        //private async void MapLocation()
+        //{
+        //    var address = Origin.Text;
+        //    var locations = await Geocoding.GetLocationsAsync(address);
+
+        //    var location = locations?.FirstOrDefault();
+        //    if (location != null)
+        //    {
+        //        pinRoute1.Position = new Xamarin.Forms.Maps.Position(firstLatitude, firstLongitude);
+        //    }
+        //}
+
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            
         }
 
         private async void FirstMapLocation()
@@ -68,15 +84,15 @@ new Position(firstLatitude, firstLongitude),
                 }
                 if (location == null)
                 {
-                    //LabelLocation.Text = "No GPS";
+                    locationLabel.Text = "No GPS";
                 }
                 else
                 {
                     firstLatitude = location.Latitude;
                     firstLongitude = location.Longitude;
-                    Position position = new Position(firstLatitude, firstLongitude);
-                    IEnumerable<string> possibleAddresses = await geoCoder.GetAddressesForPositionAsync(position);
-                    //LabelLocation.Text = possibleAddresses.FirstOrDefault();
+                    var possibleAddresses = await Geocoding.GetPlacemarksAsync(firstLatitude, firstLongitude);
+                    Placemark placemark = possibleAddresses.FirstOrDefault();
+                    string pos = placemark.AdminArea + " " + placemark.Locality + " " + placemark.Thoroughfare + " " + placemark.SubThoroughfare;/*possibleAddresses.FirstOrDefault()*/
                 }
             }
             catch (Exception ex)

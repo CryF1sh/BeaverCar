@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
@@ -18,7 +18,6 @@ namespace BeaverCar.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListTripPage : ContentPage
     {
-        private string posString;
         private readonly Geocoder geoCoder = new Geocoder();
         public ListTripPage()
         {
@@ -32,13 +31,14 @@ namespace BeaverCar.Views
             foreach (Trip trip in trips)
             {
                 //Для точки отправки
-                Position pos1 = new Position(Convert.ToDouble(trip.StartPointLatitude), Convert.ToDouble(trip.StartPointLongitude));
-                IEnumerable<string> possibleAddresses1 = await geoCoder.GetAddressesForPositionAsync(pos1);
-                trip.StritBegin = possibleAddresses1.FirstOrDefault();
+                var possibleAddresses = await Geocoding.GetPlacemarksAsync(Convert.ToDouble(trip.StartPointLatitude), Convert.ToDouble(trip.StartPointLongitude));
+                Placemark placemark = possibleAddresses.FirstOrDefault();
+                trip.StritBegin = placemark.CountryName + " " + placemark.AdminArea + " " + placemark.Locality + " " + placemark.Thoroughfare + " " + placemark.SubThoroughfare;
+               
                 //Для точки прибытия
-                Position pos2 = new Position(Convert.ToDouble(trip.EndPointLatitude), Convert.ToDouble(trip.EndPointLongitude));
-                IEnumerable<string> possibleAddresses2 = await geoCoder.GetAddressesForPositionAsync(pos2);
-                trip.StritEnd = possibleAddresses2.FirstOrDefault();           
+                possibleAddresses = await Geocoding.GetPlacemarksAsync(Convert.ToDouble(trip.EndPointLatitude), Convert.ToDouble(trip.EndPointLongitude));
+                placemark = possibleAddresses.FirstOrDefault();
+                trip.StritEnd = placemark.CountryName + " " + placemark.AdminArea + " " + placemark.Locality + " " + placemark.Thoroughfare + " " + placemark.SubThoroughfare;
             }
             ListTrip.ItemsSource = trips;
         }
