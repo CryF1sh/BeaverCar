@@ -16,5 +16,10 @@ namespace BeaverCar.Views
         {
             InitializeComponent();
         }
+
+        private void BtnCreateTrip_Clicked(object sender, EventArgs e)
+        {
+
+        }
     }
 }

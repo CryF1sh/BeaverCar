@@ -4,9 +4,7 @@
              x:Class="BeaverCar.Views.TripViewPage">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
-            <Label Text="Поездка" FontSize="Large" />
-            <Label Text="{Binding id}" FontSize="Large" />
-
+            
             <Label Text="Дата поездки: " FontSize="Large" />
             <Label Text="{Binding Date}" FontSize="Large" />
 
@@ -20,7 +18,6 @@
             <Label Text="{Binding EndPoint}" FontSize="Large" />
 
             <Button Text="Зарегестрироваться в поездку"  x:Name="BtnOnRegister" Clicked="BtnOnRegister_Clicked"/>
-            <Button Text="Return" x:Name="BtnReturn" Clicked="BtnReturn_Clicked"/>
         </StackLayout>
         
     </ContentPage.Content>

@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -17,6 +18,16 @@ namespace BeaverCar.Views
         public ListTripPage()
         {
             InitializeComponent();
+            //bool isApiAvailable = CheckAvailabilityAPI.CheckApiAvailability("http://192.168.43.65:65226");
+            //if (isApiAvailable)
+            //{
+            //    var trips = JsonConvert.DeserializeObject<List<Trip>>((string)Client.GetResponse("Trips"));
+            //    BindingContext = trips;
+            //}
+            //else
+            //{
+            //    DisplayAlert("Error", "Не удалось подключиться к API", "Ок");
+            //}
             var trips = JsonConvert.DeserializeObject<List<Trip>>((string)Client.GetResponse("Trips"));
             BindingContext = trips;
         }
