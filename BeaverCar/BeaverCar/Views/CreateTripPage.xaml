@@ -5,23 +5,25 @@
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
 
+            <Label Text="Новая" FontSize="Large" x:Name="entrStatus"/> 
+
+            <Label Text="Дата поездки: " FontSize="Large" />
+            <Entry Text="{Binding Data}" FontSize="Medium" FontAttributes="Bold" x:Name="entrDate"/>
+
+            <Label Text="Цена:" FontSize="Large" />
+            <Entry Text="{Binding Price}" FontSize="Medium" FontAttributes="Bold" x:Name="entrPrice"/>
+
             <Label Text="Точка отправки:" FontSize="Large" />
-            <Label Text="{Binding StartPoint}" FontSize="Large" />
+            <Entry FontSize="Medium" FontAttributes="Bold" x:Name="entrDate"/>
 
             <Label Text="Точка прибытия:" FontSize="Large" />
-            <Label Text="{Binding EndPoint}" FontSize="Large" />
-            
-            <Label Text="Дата и время поездки: " FontSize="Large" />
-            <Label Text="{Binding Date}" FontSize="Large" x:Name="name"/>
+            <Entry FontSize="Medium" FontAttributes="Bold" x:Name="entrDate"/>
 
-            <Label Text="Желаемая стоимость поездки:" FontSize="Large" />
-            <Label Text="{Binding Price}" FontSize="Large" />
+            <Label Text="Количество мест:" FontSize="Large" />
+            <Entry Text="{Binding CountPlace}" FontSize="Medium" FontAttributes="Bold" x:Name="entrCount"/>
 
-            <Label Text="Количество пассажиров которые поедут с вами:" FontSize="Large" />
-            <Label Text="{Binding Price}" FontSize="Large" />
-
-            <Label Text="Количество пассажиров которое вы готовы взять:" FontSize="Large"/>
-            <Label Text="{Binding Price}" FontSize="Large" />
+            <Label Text="Создатель:" FontSize="Large" />
+            <Entry Text="{Binding CreaterID}" FontSize="Medium" FontAttributes="Bold" x:Name="entrCreator"/>
 
             <Button Text="Создать поездку"  x:Name="BtnCreateTrip" Clicked="BtnCreateTrip_Clicked"/>
         </StackLayout>
