@@ -6,13 +6,13 @@ using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using System.Reflection;
+using System.Security.Cryptography;
 
 namespace BeaverCar.Views
 {
     public partial class SearchPage : ContentPage
     {
         private readonly Geocoder geoCoder = new Geocoder();
-        private Polyline polyline = new Polyline();
         private Pin pinRoute1 = new Pin
         {
             Label = "Начало пути"
@@ -28,45 +28,78 @@ namespace BeaverCar.Views
             FirstMapLocation();
             myMap.Pins.Add(pinRoute1);
             myMap.Pins.Add(pinRoute2);
-            pinRoute1.Position = new Xamarin.Forms.Maps.Position(firstLatitude, firstLongitude);
+            pinRoute1.Position = new Xamarin.Forms.Maps.Position(firstLatitude, firstLongitude); 
             myMap.MoveToRegion(MapSpan.FromCenterAndRadius(pinRoute1.Position, Xamarin.Forms.Maps.Distance.FromKilometers(0.3)));
         }
 
         private async void myMap_MapClicked(object sender, MapClickedEventArgs e)
         {
-            myMap.MapElements.Remove(polyline);
             pinRoute2.Position=new Xamarin.Forms.Maps.Position(e.Position.Latitude, e.Position.Longitude);
-            polyline = new Polyline
-            {
-                StrokeColor = Color.Blue,
-                StrokeWidth = 12,
-                Geopath =
-    {
-new Position(firstLatitude, firstLongitude),
-        new Position(e.Position.Latitude, e.Position.Longitude)
-    }
-            };
-            var possibleAddresses = await Geocoding.GetPlacemarksAsync(pinRoute2.Position.Latitude, pinRoute2.Position.Longitude);
+            var possibleAddresses = await Geocoding.GetPlacemarksAsync(pinRoute1.Position.Latitude, pinRoute1.Position.Longitude);
             Placemark placemark = possibleAddresses.FirstOrDefault();
+            Destination.Text = placemark.AdminArea + " " + placemark.Locality + " " + placemark.Thoroughfare + " " + placemark.SubThoroughfare;
+            
+            possibleAddresses = await Geocoding.GetPlacemarksAsync(pinRoute2.Position.Latitude, pinRoute2.Position.Longitude);
+            placemark = possibleAddresses.FirstOrDefault();
+            Origin.Text = placemark.AdminArea + " " + placemark.Locality + " " + placemark.Thoroughfare + " " + placemark.SubThoroughfare;
             locationLabel.Text = placemark.AdminArea + " " + placemark.Locality + " " + placemark.Thoroughfare + " " + placemark.SubThoroughfare;
-            myMap.MapElements.Add(polyline);
         }
 
-        //private async void MapLocation()
-        //{
-        //    var address = Origin.Text;
-        //    var locations = await Geocoding.GetLocationsAsync(address);
-
-        //    var location = locations?.FirstOrDefault();
-        //    if (location != null)
-        //    {
-        //        pinRoute1.Position = new Xamarin.Forms.Maps.Position(firstLatitude, firstLongitude);
-        //    }
-        //}
-
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
-            
+            try
+            {
+                int error = 0;
+                var destinationaddress = Destination.Text;
+                var locations = await Geocoding.GetLocationsAsync(destinationaddress);
+                var location = locations?.FirstOrDefault();
+                if (location == null)
+                {
+                    error++;
+                }
+                var originaddress = Origin.Text;
+                locations = await Geocoding.GetLocationsAsync(originaddress);
+                location = locations?.FirstOrDefault();
+            if (location == null)
+            {
+                    error++;
+            }
+            if(error == 0)
+                {
+                    //destinationaddress
+                    //originaddress
+                }
+            else
+                    await DisplayAlert("Ошибка!", "Неправильный адрес", "ОК");
+            }
+            catch (FeatureNotSupportedException fnsEx)
+            {
+                // Feature not supported on device
+            }
+            catch (Exception ex)
+            {
+                // Handle exception that may have occurred in geocoding
+            }
+        }
+
+        private void Origin_Completed(object sender, EventArgs e)
+        {
+            if (Origin.Text != "" & Destination.Text != "")
+            {
+                Device.BeginInvokeOnMainThread(() => AddDrive.IsVisible=true);
+            }
+            else
+                Device.BeginInvokeOnMainThread(() => AddDrive.IsVisible = false);
+        }
+
+        private void Destination_Completed(object sender, EventArgs e)
+        {
+            if (Origin.Text != "" & Destination.Text != "")
+            {
+                AddDrive.IsVisible = true;
+            }
+            else
+                AddDrive.IsVisible =false;
         }
 
         private async void FirstMapLocation()

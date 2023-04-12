@@ -59,24 +59,31 @@
                 </BoxView>
             </StackLayout>
             <Entry Placeholder="Откуда"
-                   x:Name="pos1"
+                   x:Name="Destination"
+                   Text="{Binding Destination}"
                Grid.Row="0" 
                Grid.Column="1" 
-               HorizontalOptions="FillAndExpand"/>
+               HorizontalOptions="FillAndExpand"
+                   FontSize="10"
+                  TextChanged="Destination_Completed"/>
         <Entry Placeholder="Куда"
                x:Name="Origin"
                Text="{Binding Origin}"
                Grid.Row="1" 
                Grid.Column="1" 
-               HorizontalOptions="FillAndExpand"/>
-        <Button Grid.Row="2"
+               HorizontalOptions="FillAndExpand"
+               FontSize="10"
+               TextChanged="Origin_Completed"/>
+        <Button x:Name="AddDrive"
+            Grid.Row="2"
                 Grid.Column="1" 
                 VerticalOptions="EndAndExpand"
                 HeightRequest="35"
                 WidthRequest="150"
-                Text="Проложить маршрут" 
+                Text="Создать поездку" 
                 FontSize="10"
-                Clicked="Button_Clicked"/>
+                Clicked="Button_Clicked"
+                IsVisible="false"/>
         <!--<Label x:Name="LabelLocation" TextColor="Black" HorizontalOptions="Center" VerticalOptions="Start" FontSize="10"/>
         <maps:Map x:Name="myMap" MapClicked="myMap_MapClicked" IsShowingUser="True"/> !-->
         </Grid>
