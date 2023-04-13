@@ -21,6 +21,9 @@ namespace BeaverCar.Views
         {
             InitializeComponent();
             _trip = trip;
+            BindingContext = _trip;
+            entrStart.Text = _trip.StritBegin;
+            entrEnd.Text = _trip.StritEnd;
         }
 
         private void BtnCreateTrip_Clicked(object sender, EventArgs e)
