@@ -24,13 +24,13 @@ namespace BeaverCar.Views
         private void btnDriver_Clicked(object sender, EventArgs e)
         {
             role = true;
-            new AppShell(role, _user);
+            new AppShell(_user);
         }
 
         private void btnPass_Clicked(object sender, EventArgs e)
         {
             role = false;
-            new AppShell(role, _user);
+            new AppShell(_user);
         }
     }
 }

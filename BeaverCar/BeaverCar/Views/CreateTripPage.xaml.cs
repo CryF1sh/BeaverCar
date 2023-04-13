@@ -25,7 +25,8 @@ namespace BeaverCar.Views
 
         private void BtnCreateTrip_Clicked(object sender, EventArgs e)
         {
-            SaveData();            
+            //SaveData();
+            DisplayAlert("Сообщение", "Заявка создана", "Ок");
         }
 
         private async void SaveData()

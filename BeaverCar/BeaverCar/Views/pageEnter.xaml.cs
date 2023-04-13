@@ -38,12 +38,17 @@ namespace BeaverCar.Views
                 if (users == null)
                     await DisplayAlert("Ошибка", "Такого номера нет", "Ок");
                 else
-                    await Navigation.PushAsync(new UserTypeSelectionPage(users));
+                    VhodSys(users);
             }
             catch
             {
                 await DisplayAlert("Ошибка", "Введён неправельный номер", "Ок");
             }
+        }
+
+        private void VhodSys(User users)
+        {
+            Navigation.PushAsync(new AppShell(users));     
         }
     }
 }

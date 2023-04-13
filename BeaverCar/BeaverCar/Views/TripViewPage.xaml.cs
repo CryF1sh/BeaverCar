@@ -24,7 +24,7 @@ namespace BeaverCar.Views
 
         private void BtnOnRegister_Clicked(object sender, EventArgs e)
         {
-
+            DisplayAlert("Сообщение", "Вы зарегистрированы", "Ок");
         }
             
     }
