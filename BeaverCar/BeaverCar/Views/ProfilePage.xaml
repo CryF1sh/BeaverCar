@@ -28,20 +28,51 @@
          HeightRequest="100"
          WidthRequest="100" />
             </Frame>
-                <Label x:Name="Rating" Text="{Binding Rating}"/>
+                <Grid HorizontalOptions="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Text="Рейтинг:"/>
+                    <Label Grid.Column="1" x:Name="Rating" Text="0" TextColor="DodgerBlue" />
+                    <!--{Binding Rating}!-->
+                </Grid>
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <Label Grid.Row="0" Text="Режим водителя" FontSize="10" HorizontalOptions="Center"/>
-                    <Switch x:Name="IsDriver" VerticalOptions="Start" HorizontalOptions="Center" Grid.Row="1" IsToggled="{Binding IsDriver}"/>
+                    <Switch x:Name="IsDriver" VerticalOptions="Start" HorizontalOptions="Center" Grid.Row="1" IsToggled="false"/>
+                    <!--{Binding IsDriver}!-->
                 </Grid>
             </StackLayout>
-            <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="End">
-                <Label x:Name="Name" Text="{Binding Name}"/>
-                <Label x:Name="Secondname" Text="{Binding Secondname}"/>
-                <Label x:Name="Surname" Text="{Binding Surname}"/>
+            <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="End" VerticalOptions="Center" Margin="0,-90,-20,0">
+                <Label x:Name="Name" Text="Глеб" FontSize="20" HorizontalOptions="EndAndExpand"/>
+                <!--"{Binding Name}"!-->
+                <Label x:Name="Secondname" Text="Богомолов" FontSize="20" HorizontalOptions="EndAndExpand"/>
+                <!--"{Binding Secondname}"!-->
+                <Label x:Name="Surname" Text="Олегович" FontSize="20" HorizontalOptions="EndAndExpand"/>
+                <!--{Binding Surname}!-->
+            </StackLayout>
+            <StackLayout Grid.Row="2" Margin="0,0,0,0">
+                
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" Grid.Row="0" Text="Телефон:" FontSize="15"/>
+                    <!--{Binding PhoneNumber}!-->
+                    <Label Grid.Column="1" Grid.Row="0" x:Name="PhoneNumber" Text="+7(922)922 67-05" FontSize="15"/>
+                    <Label Text="Машина:" FontSize="15" Grid.Column="0" Grid.Row="1"/>
+                    <Label x:Name="CarID" Text="Отсутствует" FontSize="15" Grid.Column="1" Grid.Row="1"/>
+                    <!--{Binding CarID}!-->
+                </Grid>
             </StackLayout>
         </Grid>
     </ContentPage.Content>
