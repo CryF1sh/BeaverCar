@@ -20,8 +20,7 @@ namespace BeaverCar.Views
         public CreateTripPage(Trip trip)
         {
             InitializeComponent();
-            _trip = trip;
-            BindingContext = _trip;
+            _trip = trip;            
             entrStart.Text = _trip.StritBegin;
             entrEnd.Text = _trip.StritEnd;
         }

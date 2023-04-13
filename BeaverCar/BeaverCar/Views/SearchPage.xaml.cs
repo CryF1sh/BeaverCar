@@ -83,6 +83,8 @@ namespace BeaverCar.Views
                     trip.StartPointLongitude=Convert.ToString(pos1Long);
                     trip.EndPointLatitude=Convert.ToString(pos2Lat);
                     trip.EndPointLongitude = Convert.ToString(pos2Long);
+                    trip.StritBegin = destinationaddress;
+                    trip.StritEnd = originaddress;
                     await Navigation.PushAsync(new CreateTripPage(trip));
                     //originaddress
                 }
