@@ -1,0 +1,711 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище BeaverCarDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Mark" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Model" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="YearProduction" Type="int" Nullable="false" />
+          <Property Name="CarPhoto" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="DriverComment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AuthorID" Type="int" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="2000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListComments">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommentID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListMapPoint">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="MapPointID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ListPassenger">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PlaceUser" Type="geography" Nullable="false" />
+          <Property Name="TripID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MapPoint">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Point" Type="geography" Nullable="false" />
+          <Property Name="Note" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Trip">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="DriverID" Type="int" />
+          <Property Name="CountPlace" Type="int" />
+          <Property Name="StatusID" Type="int" Nullable="false" />
+          <Property Name="CreaterID" Type="int" Nullable="false" />
+          <Property Name="StartPointLongitude" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="StartPointLatitude" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EndPointLongitude" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="EndPointLatitude" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SecondName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="50" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Photo" Type="varbinary(max)" />
+          <Property Name="CarID" Type="int" />
+          <Property Name="IsDriver" Type="bit" Nullable="false" />
+          <Property Name="Rating" Type="float" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DriverComment_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="DriverComment" Type="Self.DriverComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DriverComment">
+              <PropertyRef Name="AuthorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListComments_DriverComment">
+          <End Role="DriverComment" Type="Self.DriverComment" Multiplicity="1" />
+          <End Role="ListComments" Type="Self.ListComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DriverComment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListComments">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListComments_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ListComments" Type="Self.ListComments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListComments">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListMapPoint_MapPoint">
+          <End Role="MapPoint" Type="Self.MapPoint" Multiplicity="1" />
+          <End Role="ListMapPoint" Type="Self.ListMapPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapPoint">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListMapPoint">
+              <PropertyRef Name="MapPointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListMapPoint_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ListMapPoint" Type="Self.ListMapPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListMapPoint">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListPassenger_Trip">
+          <End Role="Trip" Type="Self.Trip" Multiplicity="1" />
+          <End Role="ListPassenger" Type="Self.ListPassenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trip">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListPassenger">
+              <PropertyRef Name="TripID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListPassenger_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ListPassenger" Type="Self.ListPassenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListPassenger">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trip_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trip_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="DriverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trip_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="CreaterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Car">
+          <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище BeaverCarDBModelContainer">
+          <EntitySet Name="Car" EntityType="Self.Car" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DriverComment" EntityType="Self.DriverComment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListComments" EntityType="Self.ListComments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListMapPoint" EntityType="Self.ListMapPoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ListPassenger" EntityType="Self.ListPassenger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MapPoint" EntityType="Self.MapPoint" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trip" EntityType="Self.Trip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DriverComment_User" Association="Self.FK_DriverComment_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="DriverComment" EntitySet="DriverComment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListComments_DriverComment" Association="Self.FK_ListComments_DriverComment">
+            <End Role="DriverComment" EntitySet="DriverComment" />
+            <End Role="ListComments" EntitySet="ListComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListComments_User1" Association="Self.FK_ListComments_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="ListComments" EntitySet="ListComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListMapPoint_MapPoint" Association="Self.FK_ListMapPoint_MapPoint">
+            <End Role="MapPoint" EntitySet="MapPoint" />
+            <End Role="ListMapPoint" EntitySet="ListMapPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListMapPoint_User" Association="Self.FK_ListMapPoint_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ListMapPoint" EntitySet="ListMapPoint" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListPassenger_Trip" Association="Self.FK_ListPassenger_Trip">
+            <End Role="Trip" EntitySet="Trip" />
+            <End Role="ListPassenger" EntitySet="ListPassenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListPassenger_User" Association="Self.FK_ListPassenger_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ListPassenger" EntitySet="ListPassenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trip_Status" Association="Self.FK_Trip_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Trip" EntitySet="Trip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trip_User" Association="Self.FK_Trip_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Trip" EntitySet="Trip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trip_User1" Association="Self.FK_Trip_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Trip" EntitySet="Trip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Car" Association="Self.FK_User_Car">
+            <End Role="Car" EntitySet="Car" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BeaverCarDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Car">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Mark" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Model" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="YearProduction" Type="Int32" Nullable="false" />
+          <Property Name="CarPhoto" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_Car" FromRole="Car" ToRole="User" />
+        </EntityType>
+        <EntityType Name="DriverComment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AuthorID" Type="Int32" Nullable="false" />
+          <Property Name="Comment" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_DriverComment_User" FromRole="DriverComment" ToRole="User" />
+          <NavigationProperty Name="ListComments" Relationship="Self.FK_ListComments_DriverComment" FromRole="DriverComment" ToRole="ListComments" />
+        </EntityType>
+        <EntityType Name="ListComment">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommentID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DriverComment" Relationship="Self.FK_ListComments_DriverComment" FromRole="ListComments" ToRole="DriverComment" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ListComments_User1" FromRole="ListComments" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ListMapPoint">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="MapPointID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="MapPoint" Relationship="Self.FK_ListMapPoint_MapPoint" FromRole="ListMapPoint" ToRole="MapPoint" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ListMapPoint_User" FromRole="ListMapPoint" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ListPassenger">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="PlaceUser" Type="Geography" Nullable="false" />
+          <Property Name="TripID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Trip" Relationship="Self.FK_ListPassenger_Trip" FromRole="ListPassenger" ToRole="Trip" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ListPassenger_User" FromRole="ListPassenger" ToRole="User" />
+        </EntityType>
+        <EntityType Name="MapPoint">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Point" Type="Geography" Nullable="false" />
+          <Property Name="Note" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ListMapPoints" Relationship="Self.FK_ListMapPoint_MapPoint" FromRole="MapPoint" ToRole="ListMapPoint" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Trips" Relationship="Self.FK_Trip_Status" FromRole="Status" ToRole="Trip" />
+        </EntityType>
+        <EntityType Name="Trip">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="DriverID" Type="Int32" />
+          <Property Name="CountPlace" Type="Int32" />
+          <Property Name="StatusID" Type="Int32" Nullable="false" />
+          <Property Name="CreaterID" Type="Int32" Nullable="false" />
+          <Property Name="StartPointLongitude" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StartPointLatitude" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EndPointLongitude" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="EndPointLatitude" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ListPassengers" Relationship="Self.FK_ListPassenger_Trip" FromRole="Trip" ToRole="ListPassenger" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Trip_Status" FromRole="Trip" ToRole="Status" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Trip_User" FromRole="Trip" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Trip_User1" FromRole="Trip" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SecondName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Photo" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="CarID" Type="Int32" />
+          <Property Name="IsDriver" Type="Boolean" Nullable="false" />
+          <Property Name="Rating" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Car" Relationship="Self.FK_User_Car" FromRole="User" ToRole="Car" />
+          <NavigationProperty Name="DriverComments" Relationship="Self.FK_DriverComment_User" FromRole="User" ToRole="DriverComment" />
+          <NavigationProperty Name="ListComments" Relationship="Self.FK_ListComments_User1" FromRole="User" ToRole="ListComments" />
+          <NavigationProperty Name="ListMapPoints" Relationship="Self.FK_ListMapPoint_User" FromRole="User" ToRole="ListMapPoint" />
+          <NavigationProperty Name="ListPassengers" Relationship="Self.FK_ListPassenger_User" FromRole="User" ToRole="ListPassenger" />
+          <NavigationProperty Name="Trips" Relationship="Self.FK_Trip_User" FromRole="User" ToRole="Trip" />
+          <NavigationProperty Name="Trips1" Relationship="Self.FK_Trip_User1" FromRole="User" ToRole="Trip" />
+        </EntityType>
+        <Association Name="FK_User_Car">
+          <End Role="Car" Type="Self.Car" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Car">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="CarID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DriverComment_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="DriverComment" Type="Self.DriverComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="DriverComment">
+              <PropertyRef Name="AuthorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListComments_DriverComment">
+          <End Role="DriverComment" Type="Self.DriverComment" Multiplicity="1" />
+          <End Role="ListComments" Type="Self.ListComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DriverComment">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListComments">
+              <PropertyRef Name="CommentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListComments_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ListComments" Type="Self.ListComment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListComments">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListMapPoint_MapPoint">
+          <End Role="MapPoint" Type="Self.MapPoint" Multiplicity="1" />
+          <End Role="ListMapPoint" Type="Self.ListMapPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MapPoint">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListMapPoint">
+              <PropertyRef Name="MapPointID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListMapPoint_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ListMapPoint" Type="Self.ListMapPoint" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListMapPoint">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListPassenger_Trip">
+          <End Role="Trip" Type="Self.Trip" Multiplicity="1" />
+          <End Role="ListPassenger" Type="Self.ListPassenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trip">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListPassenger">
+              <PropertyRef Name="TripID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ListPassenger_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ListPassenger" Type="Self.ListPassenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ListPassenger">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trip_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="StatusID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trip_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="DriverID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trip_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Trip" Type="Self.Trip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Trip">
+              <PropertyRef Name="CreaterID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BeaverCarDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Cars" EntityType="Self.Car" />
+          <EntitySet Name="DriverComments" EntityType="Self.DriverComment" />
+          <EntitySet Name="ListComments" EntityType="Self.ListComment" />
+          <EntitySet Name="ListMapPoints" EntityType="Self.ListMapPoint" />
+          <EntitySet Name="ListPassengers" EntityType="Self.ListPassenger" />
+          <EntitySet Name="MapPoints" EntityType="Self.MapPoint" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="Trips" EntityType="Self.Trip" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_User_Car" Association="Self.FK_User_Car">
+            <End Role="Car" EntitySet="Cars" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DriverComment_User" Association="Self.FK_DriverComment_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="DriverComment" EntitySet="DriverComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListComments_DriverComment" Association="Self.FK_ListComments_DriverComment">
+            <End Role="DriverComment" EntitySet="DriverComments" />
+            <End Role="ListComments" EntitySet="ListComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListComments_User1" Association="Self.FK_ListComments_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ListComments" EntitySet="ListComments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListMapPoint_MapPoint" Association="Self.FK_ListMapPoint_MapPoint">
+            <End Role="MapPoint" EntitySet="MapPoints" />
+            <End Role="ListMapPoint" EntitySet="ListMapPoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListMapPoint_User" Association="Self.FK_ListMapPoint_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ListMapPoint" EntitySet="ListMapPoints" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListPassenger_Trip" Association="Self.FK_ListPassenger_Trip">
+            <End Role="Trip" EntitySet="Trips" />
+            <End Role="ListPassenger" EntitySet="ListPassengers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ListPassenger_User" Association="Self.FK_ListPassenger_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ListPassenger" EntitySet="ListPassengers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trip_Status" Association="Self.FK_Trip_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Trip" EntitySet="Trips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trip_User" Association="Self.FK_Trip_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Trip" EntitySet="Trips" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trip_User1" Association="Self.FK_Trip_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Trip" EntitySet="Trips" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище BeaverCarDBModelContainer" CdmEntityContainer="BeaverCarDBEntities">
+          <EntitySetMapping Name="Cars">
+            <EntityTypeMapping TypeName="BeaverCarDBModel.Car">
+              <MappingFragment StoreEntitySet="Car">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Mark" ColumnName="Mark" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="YearProduction" ColumnName="YearProduction" />
+                <ScalarProperty Name="CarPhoto" ColumnName="CarPhoto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DriverComments">
+            <EntityTypeMapping TypeName="BeaverCarDBModel.DriverComment">
+              <MappingFragment StoreEntitySet="DriverComment">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="AuthorID" ColumnName="AuthorID" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListComments">
+            <EntityTypeMapping TypeName="BeaverCarDBModel.ListComment">
+              <MappingFragment StoreEntitySet="ListComments">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListMapPoints">
+            <EntityTypeMapping TypeName="BeaverCarDBModel.ListMapPoint">
+              <MappingFragment StoreEntitySet="ListMapPoint">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="MapPointID" ColumnName="MapPointID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ListPassengers">
+            <EntityTypeMapping TypeName="BeaverCarDBModel.ListPassenger">
+              <MappingFragment StoreEntitySet="ListPassenger">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="PlaceUser" ColumnName="PlaceUser" />
+                <ScalarProperty Name="TripID" ColumnName="TripID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MapPoints">
+            <EntityTypeMapping TypeName="BeaverCarDBModel.MapPoint">
+              <MappingFragment StoreEntitySet="MapPoint">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="Note" ColumnName="Note" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="BeaverCarDBModel.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trips">
+            <EntityTypeMapping TypeName="BeaverCarDBModel.Trip">
+              <MappingFragment StoreEntitySet="Trip">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="DriverID" ColumnName="DriverID" />
+                <ScalarProperty Name="CountPlace" ColumnName="CountPlace" />
+                <ScalarProperty Name="StatusID" ColumnName="StatusID" />
+                <ScalarProperty Name="CreaterID" ColumnName="CreaterID" />
+                <ScalarProperty Name="StartPointLongitude" ColumnName="StartPointLongitude" />
+                <ScalarProperty Name="StartPointLatitude" ColumnName="StartPointLatitude" />
+                <ScalarProperty Name="EndPointLongitude" ColumnName="EndPointLongitude" />
+                <ScalarProperty Name="EndPointLatitude" ColumnName="EndPointLatitude" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BeaverCarDBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SecondName" ColumnName="SecondName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="CarID" ColumnName="CarID" />
+                <ScalarProperty Name="IsDriver" ColumnName="IsDriver" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
